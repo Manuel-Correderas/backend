@@ -1,0 +1,35 @@
+extends layoutTareasEmpleado
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+      h2.mb-0 Tareas de #{empleado.nombre} #{empleado.apellido}
+      a.btn.btn-secondary.btn-sm(href=`/empleado/${empleado.id}/dashboard`)
+        i.fa.fa-arrow-left.me-1
+        | Volver
+
+    .card-body.p-0
+      if tareas.length
+        .table-responsive
+          table.table.table-hover.mb-0
+            thead.table-light
+              tr
+                th Título
+                th Estado
+                th Prioridad
+                th Fecha
+                th Área
+            tbody
+              each t in tareas
+                tr(class=rowClass)
+                  td.py-2 #{t.titulo}
+                  td.py-2 #{t.estado}
+                  td.py-2 #{t.prioridad}
+                  td.py-2 #{t.fecha}
+                  td.py-2 #{t.area}
+                  td.text-center.py-2
+                    a.btn.btn-sm.btn-primary(href=`/empleado/${empleado.id}/tareas/${t.id}`)
+                      i.fa.fa-file-alt.me-1
+                      | Informe
+
+      else
+        .p-4.text-center.text-muted No hay tareas asignadas.

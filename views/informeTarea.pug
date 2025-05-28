@@ -1,0 +1,25 @@
+extends layoutEmpleado
+
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white
+      h4.mb-0 Informe de tarea: #{tarea.titulo}
+
+    .card-body
+      form(method="POST" action=`/empleado/${empleado.id}/tareas/${tarea.id}?_method=PUT`)
+        .mb-3
+          label.form-label Estado actual
+          input.form-control(type="text", value=tarea.estado, readonly)
+
+        .mb-3
+          label.form-label Informe (comentario final)
+          textarea.form-control(name="informe" required)= tarea.informe
+
+        button.btn.btn-success(type="submit")
+          i.fa.fa-check.me-1
+          | Finalizar tarea
+
+      .mt-3
+        a.btn.btn-secondary(href=`/empleado/${empleado.id}/tareas`)
+          i.fa.fa-arrow-left.me-1
+          | Volver a tareas

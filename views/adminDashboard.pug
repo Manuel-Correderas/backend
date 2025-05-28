@@ -1,0 +1,19 @@
+extends layoutAdm
+
+block contenido
+  .container.mt-5.text-center
+    h2.mb-4 Panel de Administración
+
+    .row.justify-content-center
+      .col-md-4
+        a.btn.btn-outline-primary.btn-lg.w-100(href="/usuarios")
+          i.fa.fa-users.me-2
+          | Gestión de Usuarios
+      .col-md-4
+        a.btn.btn-outline-primary.btn-lg.w-100(href="/empleados")
+          i.fa.fa-users.me-2
+          | Gestión de Empleados
+      .col-md-4
+        a.btn.btn-outline-success.btn-lg.w-100(href="/tareas")
+          i.fa.fa-tasks.me-2
+          | Gestión de Tareas

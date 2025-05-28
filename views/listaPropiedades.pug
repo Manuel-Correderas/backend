@@ -1,0 +1,12 @@
+extends layoutEmpleado
+
+block contenido
+  h2 Propiedades del Propietario #{id}
+  a.btn.btn-success(href=`/propietario/${id}/propiedades/nueva`) Nueva Propiedad
+
+  if propiedades.length
+    ul
+      each p in propiedades
+        li #{p.direccion} - Estado: #{p.estado}
+  else
+    p No hay propiedades registradas.

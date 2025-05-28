@@ -1,0 +1,30 @@
+// views/nuevaPropiedad.pug
+extends layoutEmpleado
+
+block contenido
+  h2.mb-4 Nueva Propiedad
+
+  form(method="POST" action=`/propietario/${id}/propiedades` enctype="multipart/form-data")
+    .mb-3
+      label.form-label(for="direccion") Dirección de la propiedad
+      input.form-control(type="text" name="direccion" required)
+
+    .mb-3
+      label.form-label(for="foto") Foto de la propiedad
+      input.form-control(type="file" name="foto" accept="image/*")
+
+    .mb-3
+      label.form-label(for="dias") Días disponibles para visita (ej: Lunes,Martes)
+      input.form-control(type="text" name="dias" placeholder="Separar con comas" required)
+
+    .mb-3
+      label.form-label(for="horaDesde") Hora desde
+      input.form-control(type="time" name="horaDesde" required)
+
+    .mb-3
+      label.form-label(for="horaHasta") Hora hasta
+      input.form-control(type="time" name="horaHasta" required)
+
+    button.btn.btn-primary.mt-3(type="submit")
+      i.fa.fa-save.me-1
+      | Guardar Propiedad

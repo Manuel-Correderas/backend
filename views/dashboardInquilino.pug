@@ -1,0 +1,20 @@
+extends layoutEmpleado
+
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+      h2.mb-0 Panel del Inquilino
+      a.btn.btn-secondary.btn-sm(href="/inicio")
+        i.fa.fa-sign-out-alt.me-1
+        | Salir
+
+    .card-body
+      p Bienvenido, inquilino ID #{id}
+
+      .d-flex.flex-column.gap-3
+        a.btn.btn-primary(href=`/inquilino/${id}/solicitar-turno`)
+          i.fa.fa-calendar-check.me-1
+          | Solicitar Turno
+        a.btn.btn-success(href=`/inquilino/${id}/comprobantes`)
+          i.fa.fa-upload.me-1
+          | Subir Comprobante de Pago

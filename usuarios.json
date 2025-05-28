@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana1",
+    "apellido": "Gómez",
+    "dni": "123123",
+    "telefono": "111111111",
+    "foto": "/public/uploads/foto-1747677683429.jpeg",
+    "email": "ab@a.com",
+    "usuario": "1",
+    "contrasena": "1",
+    "rol": "inquilino"
+  },
+  {
+    "id": 2,
+    "nombre": "Juan2",
+    "apellido": "Garcia",
+    "dni": "111111",
+    "telefono": "111111111",
+    "email": "j@g.com",
+    "usuario": "2",
+    "contrasena": "2",
+    "rol": "propietario"
+  },
+  {
+    "id": 3,
+    "nombre": "Pedro",
+    "apellido": "Perez"
+  },
+  {
+    "id": 4,
+    "nombre": "Julia",
+    "apellido": "Sanchez"
+  },
+  {
+    "id": 5,
+    "nombre": "Emir",
+    "apellido": "Garcia"
+  },
+  {
+    "id": 6,
+    "nombre": "Haydee",
+    "apellido": "Fernandez"
+  },
+  {
+    "id": 7,
+    "nombre": "Enzo",
+    "apellido": "Pereyra"
+  },
+  {
+    "id": 8,
+    "nombre": "Diana",
+    "apellido": "Suarez"
+  },
+  {
+    "id": 9,
+    "nombre": "Mario",
+    "apellido": "Procopio"
+  },
+  {
+    "id": 10,
+    "nombre": "Celeste",
+    "apellido": "Maidana"
+  },
+  {
+    "id": 12,
+    "nombre": "manu",
+    "apellido": "corre",
+    "dni": "33932",
+    "telefono": "119991199",
+    "email": "m@c.com",
+    "foto": "",
+    "rol": "empleado"
+  },
+  {
+    "id": 13,
+    "nombre": "manu",
+    "apellido": "corre",
+    "dni": "33932941",
+    "telefono": "1169671199",
+    "email": "m@m.com",
+    "foto": "",
+    "usuario": "m",
+    "contrasena": "c",
+    "rol": "empleado"
+  },
+  {
+    "id": 14,
+    "nombre": "manu",
+    "apellido": "corre",
+    "dni": "111111",
+    "telefono": "111111",
+    "email": "m@c.com",
+    "foto": "",
+    "usuario": "p",
+    "contrasena": "r",
+    "rol": "administrador"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1747834992930,
+    "titulo": "a",
+    "descripcion": "a",
+    "prioridad": "Alta",
+    "area": "Mantenimiento",
+    "empleadoId": 9,
+    "informe": "",
+    "finalizada": false
+  },
+  {
+    "id": 1747882075595,
+    "titulo": "ab",
+    "descripcion": "ab",
+    "prioridad": "Alta",
+    "area": "Administración",
+    "empleadoId": 13,
+    "informe": "",
+    "finalizada": false
+  }
+]

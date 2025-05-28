@@ -1,0 +1,21 @@
+// views/exito.pug
+extends layoutEmpleado
+
+block contenido
+  .card.mx-auto.shadow-sm(style="max-width: 500px;")
+    .card-header.bg-success.text-white
+      h4.mb-0 Éxito
+    .card-body
+      e.lead= mensaje
+      e
+        | ID:
+        strong #{empleado.id}
+      e
+        | Nombre:
+        strong #{empleado.nombre}
+      e
+        | Apellido:
+        strong #{empleado.apellido}
+      a.btn.btn-primary.mt-3(href="/")
+        i.fa.fa-arrow-left.me-1
+        | Volver al listado

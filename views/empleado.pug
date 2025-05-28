@@ -1,0 +1,28 @@
+extends layoutEmpleado
+
+block contenido
+  .card.mx-auto.shadow-sm.mb-4(style="max-width: 400px;")
+    .card-header.bg-primary.text-white.py-2
+      h3.mb-0 Detalle de Empleado
+    .card-body
+      if empleado.foto
+        img.img-fluid.rounded-circle.mb-3(src=empleado.foto alt=`Foto de ${empleado.nombre}`)
+      else
+        img.img-fluid.rounded-circle.mb-3(src="https://via.placeholder.com/150" alt="Sin foto")
+      ul.list-group
+        li.list-group-item
+          strong ID: #{empleado.id}
+        li.list-group-item
+          strong Nombre: #{empleado.nombre}
+        li.list-group-item
+          strong Apellido: #{empleado.apellido}
+        li.list-group-item
+          strong DNI: #{empleado.dni}
+        li.list-group-item
+          strong Teléfono: #{empleado.telefono}
+        li.list-group-item
+          strong Email: #{empleado.email}
+
+      a.btn.btn-secondary.mt-3(href="/")
+        i.fa.fa-arrow-left.me-1
+        | Volver al listado

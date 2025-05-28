@@ -1,0 +1,11 @@
+extends layoutInicio
+
+block contenido
+  .text-center.mt-5
+    h1.mb-4.text-primary Sistema de Usuarios
+
+    .d-grid.gap-3.mx-auto(style="max-width: 300px;")
+      a.btn.btn-dark.btn-lg(href="/login?rol=administrador") Administrador
+      a.btn.btn-outline-primary.btn-lg(href="/login?rol=empleado") Empleados
+      a.btn.btn-outline-secondary.btn-lg(href="/login?rol=inquilino") Inquilinos
+      a.btn.btn-outline-secondary.btn-lg(href="/login?rol=propietario") Propietarios

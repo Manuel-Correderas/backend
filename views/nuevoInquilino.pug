@@ -1,0 +1,36 @@
+extends layoutEmpleado
+
+block contenido
+  .container.mt-5
+    h2 Crear Inquilino
+
+    form(method="POST" action="/inquilinos/nuevo")
+      .mb-3
+        label.form-label(for="id") ID
+        input.form-control(type="number", name="id", required)
+      .mb-3
+        label.form-label(for="nombre") Nombre
+        input.form-control(type="text", name="nombre", required)
+      .mb-3
+        label.form-label(for="apellido") Apellido
+        input.form-control(type="text", name="apellido", required)
+      .mb-3
+        label.form-label(for="dni") DNI
+        input.form-control(type="text", name="dni", required)
+      .mb-3
+        label.form-label(for="telefono") Teléfono
+        input.form-control(type="text", name="telefono", required)
+      .mb-3
+        label.form-label(for="email") Email
+        input.form-control(type="email", name="email", required)
+      .mb-3
+        label.form-label(for="direccion") Dirección
+        input.form-control(type="text", name="direccion", required)
+      .mb-3
+        label.form-label(for="usuario") Usuario
+        input.form-control(type="text", name="usuario", required)
+      .mb-3
+        label.form-label(for="contrasena") Contraseña
+        input.form-control(type="password", name="contrasena", required)
+
+      button.btn.btn-primary(type="submit") Crear

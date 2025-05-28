@@ -1,0 +1,44 @@
+extends layoutEmpleado
+
+block contenido
+  .card.mx-auto.shadow-sm.mb-4(style="max-width: 480px;")
+    .card-header.bg-white.py-3
+      h3.mb-0 Editar Empleado #{empleado.id}
+    .card-body
+      form(method="POST" action=`/empleados/${empleado.id}?_method=PUT` enctype="multipart/form-data")
+        .mb-3
+          label.form-label(for="usuario") Usuario
+          input.form-control(type="text" name="usuario" id="usuario" value=empleado.usuario required)
+        .mb-3
+          label.form-label(for="contrasena") Contraseña
+          input.form-control(type="password" name="contrasena" id="contrasena" value=empleado.contrasena required)
+        .mb-3
+          label.form-label(for="rol") Rol
+          select.form-select(name="rol" id="rol")
+            option(value="empleado", selected=empleado.rol === 'empleado') Empleado
+            option(value="administrador", selected=empleado.rol === 'administrador') Administrador
+        .mb-3
+          label.form-label(for="nombre") Nombre
+          input.form-control(type="text" name="nombre" id="nombre" value=empleado.nombre required)
+        .mb-3
+          label.form-label(for="apellido") Apellido
+          input.form-control(type="text" name="apellido" id="apellido" value=empleado.apellido required)
+        .mb-3
+          label.form-label(for="dni") DNI
+          input.form-control(type="text" name="dni" id="dni" value=empleado.dni required)
+        .mb-3
+          label.form-label(for="telefono") Teléfono
+          input.form-control(type="text" name="telefono" id="telefono" value=empleado.telefono required)
+        .mb-3
+          label.form-label(for="email") Correo Electrónico
+          input.form-control(type="email" name="email" id="email" value=empleado.email required)
+        .mb-3
+          label.form-label(for="foto") Cambiar foto de perfil
+          input.form-control(type="file" name="foto" id="foto" accept="image/*")
+        .d-flex.justify-content-end
+          button.btn.btn-primary(type="submit")
+            i.fa.fa-save.me-1
+            | Guardar
+          a.btn.btn-secondary.ms-2(href="/empleados")
+            i.fa.fa-times.me-1
+            | Cancelar

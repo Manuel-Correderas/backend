@@ -1,0 +1,46 @@
+extends layoutTarea
+block contenido
+  .container.mt-5
+    h2.mb-4 Asignar Nueva Tarea
+
+    form(method="POST" action="/tareas/nueva")
+      .mb-3
+        label.form-label(for="titulo") Título
+        input.form-control(type="text" name="titulo" required)
+
+      .mb-3
+        label.form-label(for="descripcion") Descripción
+        textarea.form-control(name="descripcion" rows="3" required)
+
+      .mb-3
+        label.form-label(for="prioridad") Prioridad
+        select.form-select(name="prioridad" required)
+          option(value="Alta") Alta
+          option(value="Media") Media
+          option(value="Baja") Baja
+
+      .mb-3
+        label.form-label(for="area") Área asignada
+        select.form-select(name="area" id="area" required)
+            option(value="" disabled selected) Seleccionar área...
+            option(value="Administración") Administración
+            option(value="Contabilidad") Contabilidad
+            option(value="Ventas") Ventas
+            option(value="Mantenimiento") Mantenimiento
+
+
+      .mb-3
+        label.form-label(for="empleadoId") Asignar a Empleado
+        select.form-select(name="empleadoId" required)
+          each emp in empleados
+            option(value=emp.id)= `${emp.nombre} ${emp.apellido}`
+
+      .mb-3
+        label.form-label Fecha de Asignación
+        input.form-control(type="text" readonly value=`${new Date().toLocaleString()}`)
+
+      .d-flex.justify-content-end
+        button.btn.btn-primary(type="submit")
+          i.fa.fa-check-circle.me-1
+          | Guardar Tarea
+

@@ -1,0 +1,57 @@
+extends layoutEmpleado
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+      h2.mb-0 Lista de Usuarios
+      .d-flex.align-items-center
+        input#search.form-control.me-2(type="text" placeholder="Buscar persona...")
+        a.btn.btn-success.btn-sm(href="/usuarios/nuevo")
+          i.fa.fa-user-plus.me-1
+          | Agregar
+
+    .card-body.p-0
+      if usuarios.length
+        .table-responsive
+          table.table.table-hover.mb-0#usuarios-table
+            thead.table-light
+              tr
+                th ID
+                th Nombre
+                th Apellido
+                th Usuario
+                th Contraseña
+                th Rol
+                th DNI
+                th Teléfono
+                th Email
+                th.text-center Acciones
+            tbody
+              each u in usuarios
+                tr
+                  td.py-2 #{u.id}
+                  td.py-2 #{u.nombre}
+                  td.py-2 #{u.apellido}
+                  td.py-2 #{u.usuario}
+                  td.py-2 #{u.contrasena}
+                  td.py-2 #{u.rol}
+                  td.py-2 #{u.dni}
+                  td.py-2 #{u.telefono}
+                  td.py-2 #{u.email}
+                  td.text-center.py-2
+                    a.btn.btn-sm.btn-primary.mx-1(href=`/usuarios/${u.id}`)
+                      i.fa.fa-eye
+                    a.btn.btn-sm.btn-warning.mx-1(href=`/usuarios/${u.id}/editar`)
+                      i.fa.fa-edit
+                    form.d-inline(method="POST", action=`/usuarios/${u.id}?_method=DELETE`)
+                      button.btn.btn-sm.btn-danger(type="submit" onclick="return confirm('¿Eliminar registro?');")
+                        i.fa.fa-trash
+      else
+        .p-4.text-center.text-muted No hay personas registradas.
+
+  script.
+    document.getElementById('search').addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('#usuarios-table tbody tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+      });
+    });
