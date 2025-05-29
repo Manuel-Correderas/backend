@@ -95,5 +95,17 @@
     "usuario": "p",
     "contrasena": "r",
     "rol": "administrador"
+  },
+  {
+    "id": 20,
+    "nombre": "coco",
+    "apellido": "x",
+    "dni": "1111",
+    "telefono": "2222",
+    "email": "c@c.com",
+    "foto": "",
+    "usuario": "c",
+    "contrasena": "c",
+    "rol": "empleado"
   }
 ]

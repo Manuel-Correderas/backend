@@ -4,6 +4,7 @@ export default class Turno {
     this.id = id;
     this.inquilinoId = inquilinoId;
     this.propiedadId = propiedadId;
+    this.empleadoId=this.empleadoId;
     this.fecha = fecha;
     this.comprobante = comprobante;
     this.pagado = pagado;

@@ -18,5 +18,15 @@
     "empleadoId": 13,
     "informe": "",
     "finalizada": false
+  },
+  {
+    "id": 1748456329632,
+    "titulo": "cocinar",
+    "descripcion": "pollo",
+    "prioridad": "Alta",
+    "area": "Mantenimiento",
+    "empleadoId": 12,
+    "informe": "",
+    "finalizada": false
   }
 ]

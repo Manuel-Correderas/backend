@@ -100,8 +100,24 @@ app.post('/usuarios/nuevo', upload.single('foto'), async (req, res) => {
   }
 
   const nuevoId = usuarios.length ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
-  usuarios.push(new Usuario(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol));
+  const nuevoUsuario = new Usuario(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol);
+  usuarios.push(nuevoUsuario);
   await escribirJSON(DB_USUARIOS, usuarios);
+
+  if (rol === 'empleado') {
+    const empleados = await leerJSON(DB_EMPLEADOS);
+    empleados.push(new Empleado(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol));
+    await escribirJSON(DB_EMPLEADOS, empleados);
+  } else if (rol === 'propietario') {
+    const propietarios = await leerJSON(DB_PROPIETARIOS);
+    propietarios.push(new Propietario(nuevoId, nombre, apellido, email, telefono, usuario, contrasena));
+    await escribirJSON(DB_PROPIETARIOS, propietarios);
+  } else if (rol === 'inquilino') {
+    const inquilinos = await leerJSON(DB_INQUILINOS);
+    inquilinos.push(new Inquilino(nuevoId, nombre, apellido, email, telefono, usuario, contrasena));
+    await escribirJSON(DB_INQUILINOS, inquilinos);
+  }
+
   res.redirect('/usuarios');
 });
 
@@ -154,11 +170,22 @@ app.post('/empleados/nuevo', upload.single('foto'), async (req, res) => {
   const foto = req.file ? `/public/uploads/${req.file.filename}` : '';
 
   const empleados = await leerJSON(DB_EMPLEADOS);
+  const usuarios = await leerJSON(DB_USUARIOS);
+
   const nuevoId = empleados.length ? Math.max(...empleados.map(e => e.id)) + 1 : 1;
-  empleados.push(new Empleado(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol));
+
+  const nuevoEmpleado = new Empleado(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol);
+  const nuevoUsuario = new Usuario(nuevoId, nombre, apellido, dni, telefono, email, foto, usuario, contrasena, rol);
+
+  empleados.push(nuevoEmpleado);
+  usuarios.push(nuevoUsuario);
+
   await escribirJSON(DB_EMPLEADOS, empleados);
+  await escribirJSON(DB_USUARIOS, usuarios);
+
   res.redirect('/empleados');
 });
+
 
 app.get('/empleados/:id', async (req, res) => {
   const empleados = await leerJSON(DB_EMPLEADOS);
@@ -219,7 +246,7 @@ app.post('/tareas/nueva', async (req, res) => {
   const tareas = await leerJSON(DB_TAREAS);
   const nueva = new Tarea(Date.now(), titulo, descripcion, estado, prioridad, fecha, area, parseInt(empleadoId));
   tareas.push(nueva);
-  await escribirJSON(tareas);
+  await escribirJSON(DB_TAREAS, tareas); // ✅ CORRECTO
   res.redirect('/tareas');
 });
 
@@ -277,7 +304,6 @@ app.put('/empleado/:id/asignar-turno/:turnoId', async (req, res) => {
   await escribirJSON(DB_TURNOS, turnos);
   res.redirect(`/empleado/${req.params.id}/dashboard`);
 });
-
 
 
 
@@ -352,20 +378,25 @@ app.put('/propietario/:id/turno/:turnoId/aceptar', async (req, res) => {
   const turnos = await leerJSON(DB_TURNOS);
   const idx = turnos.findIndex(t => t.id === parseInt(req.params.turnoId));
   if (idx === -1) return res.status(404).send('Turno no encontrado');
-  turnos[idx].estado = 'pendiente';
+  
+  turnos[idx].estado = 'aceptado'; // <<< CORREGIDO ACÁ
   await escribirJSON(DB_TURNOS, turnos);
+
   res.redirect(`/propietario/${req.params.id}/dashboard`);
 });
+
 ///
 app.get('/empleado/:id/dashboard', async (req, res) => {
   const { id } = req.params;
   const empleado = (await leerJSON(DB_EMPLEADOS)).find(e => e.id === parseInt(id));
   if (!empleado) return res.status(404).render('error', { mensaje: 'Empleado no encontrado' });
-
+  
   const turnos = await leerJSON(DB_TURNOS);
-  const pendientes = turnos.filter(t => t.estado === 'pendiente' || (t.estado === 'aceptado' && !t.empleadoId));
+  const aceptados = turnos.filter(t => t.estado === 'aceptado' && !t.empleadoId);
 
-  res.render('dashboardEmpleado', { empleado, turnos: pendientes });
+
+
+  res.render('dashboardEmpleado', { empleado, turnos: aceptados });
 });
 
 

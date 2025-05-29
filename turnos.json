@@ -3,9 +3,10 @@
     "id": 1,
     "inquilinoId": 1,
     "propiedadId": 1,
+    "empleadoId":"",
     "fecha": "2025-05-27 09:00",
     "comprobante": "",
     "pagado": false,
-    "estado": "pendiente"
+    "estado": "aceptado"
   }
 ]

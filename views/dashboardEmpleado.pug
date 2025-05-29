@@ -31,16 +31,17 @@ block contenido
 
         h5 Turnos Pendientes para Acompañar
         if turnos && turnos.length
-          each turno in turnos
-            .border.p-3.mb-2
-              p Propiedad ID: #{turno.propiedadId} - Fecha y hora: #{turno.fecha}
-              if turno.estado === 'pendiente' && !turno.empleadoId
-                form(method="POST", action=`/empleado/${empleado.id}/asignar-turno/${turno.id}?_method=PUT`)
-                  button.btn.btn-warning.btn-sm(type="submit") Asignarme a este Turno
-              else if turno.empleadoId === empleado.id
-                p.text-success Ya estás asignado a este turno.
-              else
-                p.text-muted Turno ya asignado.
+            each turno in turnos
+              .border.p-3.mb-2
+                p Propiedad ID: #{turno.propiedadId} - Fecha y hora: #{turno.fecha}
+                if turno.estado === 'aceptado' && !turno.empleadoId
+                  form(method="POST", action=`/empleado/${empleado.id}/asignar-turno/${turno.id}?_method=PUT`)
+                    button.btn.btn-warning.btn-sm(type="submit") Asignarme a este Turno
+                else if turno.empleadoId === empleado.id
+                  p.text-success Ya estás asignado a este turno.
+                else
+                  p.text-muted Turno ya asignado.
+
 
         else
           p.text-muted No hay turnos pendientes.
