@@ -1,0 +1,34 @@
+extends layoutPropietario
+
+block contenido
+  h2.mb-4 Panel del Propietario
+
+  p Bienvenido, propietario ID #{id}
+
+  .d-flex.flex-column.flex-md-row.gap-3.my-3
+    a.btn.btn-primary(href=`/propietario/${id}/propiedades`)
+      i.fa.fa-home.me-1
+      | Ver Propiedades
+
+    a.btn.btn-success(href=`/propietario/${id}/propiedades/nueva`)
+      i.fa.fa-plus.me-1
+      | Añadir Propiedad
+
+  h4.mt-4 Turnos pendientes de aprobación
+  if solicitudes && solicitudes.length
+    each turno in solicitudes
+      .border.p-3.mb-3
+        p Propiedad ID: #{turno.propiedadId}
+        p Fecha y hora: #{turno.fecha}
+        if turno.estado === 'pendiente'
+          form(method="POST", action=`/propietario/${id}/turno/${turno.id}/aceptar?_method=PUT`)
+            button.btn.btn-success.btn-sm(type="submit") Aceptar Turno
+        else
+          p.text-muted Turno ya aceptado
+  else
+    p.text-muted No hay solicitudes pendientes
+  hr
+
+  a.btn.btn-outline-danger.mt-4(href="/login?rol=propietario")
+    i.fa.fa-sign-out-alt.me-1
+    | Cerrar sesión

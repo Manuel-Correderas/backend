@@ -1,0 +1,49 @@
+extends layoutTarea
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+      h2.mb-0 Lista de Tareas
+      a.btn.btn-success.btn-sm(href="/tareas/nueva")
+        i.fa.fa-plus.me-1
+        | Nueva
+
+    .card-body.p-0
+      if tareas.length
+        .table-responsive
+          table.table.table-hover.mb-0#tareas-table
+            thead.table-light
+              tr
+                th ID
+                th Título
+                th Estado
+                th Prioridad
+                th Fecha
+                th Área
+                th Asignado
+                th.text-center Acciones
+            tbody
+              each t in tareas
+                tr
+                  td.py-2 #{t.id}
+                  td.py-2 #{t.titulo}
+                  td.py-2 #{t.estado}
+                  td.py-2 #{t.prioridad}
+                  td.py-2 #{t.fecha}
+                  td.py-2 #{t.area}
+                  td.py-2
+                    - const emp = empleados.find(e => e.id === t.empleadoId);
+                    = emp ? emp.nombre + ' ' + emp.apellido : 'No asignado'
+                  td.text-center.py-2
+                    form.d-inline(method="POST" action=`/tareas/${t.id}?_method=DELETE`)
+                      button.btn.btn-sm.btn-danger(type="submit" onclick="return confirm('¿Eliminar tarea?');")
+                        i.fa.fa-trash
+      else
+        .p-4.text-center.text-muted No hay tareas registradas.
+
+  script.
+    document.getElementById('search')?.addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('#tareas-table tbody tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+      });
+    });

@@ -1,0 +1,84 @@
+extends layoutPropietario
+
+block contenido
+  
+  h2.mb-4 Nueva Propiedad
+
+  form(method="POST" action=`/propietario/${id}/propiedades` enctype="multipart/form-data")
+    .mb-3
+      label.form-label(for="direccion") Dirección de la propiedad
+      input.form-control(type="text" name="direccion" required)
+
+    .mb-3
+      label.form-label(for="foto") Foto de la propiedad
+      input.form-control(type="file" name="foto" accept="image/*")
+
+    .mb-3
+      label.form-label(for="dias") Días disponibles (ej: Lunes,Martes)
+      input.form-control(type="text" name="dias" id="diasInput" placeholder="Separar con comas" required)
+
+    .mb-3
+      label.form-label(for="horaDesde") Hora desde
+      input.form-control(type="time" name="horaDesde" id="horaDesde" required)
+
+    .mb-3
+      label.form-label(for="horaHasta") Hora hasta
+      input.form-control(type="time" name="horaHasta" id="horaHasta" required)
+
+    button.btn.btn-primary.mt-3(type="submit")
+      i.fa.fa-save.me-1
+      | Guardar Propiedad
+  a.btn.btn-outline-secondary.mt-4(href=`/propietario/${id}/dashboard`)
+    i.fa.fa-arrow-left.me-1
+    | Volver al Panel
+  hr
+
+  h5 Vista previa (días próximos)
+  table.table.table-bordered#previewTable
+    thead
+      tr
+        th Día
+        th Fecha
+        th Desde
+        th Hasta
+    tbody
+
+  script.
+    const diasInput = document.getElementById('diasInput');
+    const horaDesde = document.getElementById('horaDesde');
+    const horaHasta = document.getElementById('horaHasta');
+    const tbody = document.querySelector('#previewTable tbody');
+
+    function actualizarTabla() {
+      const diasTexto = diasInput.value.toLowerCase().split(',').map(d => d.trim());
+      const desde = horaDesde.value || '-';
+      const hasta = horaHasta.value || '-';
+      const diasSemana = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+      const hoy = new Date();
+
+      tbody.innerHTML = '';
+
+      for (let i = 1; i <= 7; i++) {
+        const fecha = new Date();
+        fecha.setDate(hoy.getDate() + i);
+        const nombreDia = diasSemana[fecha.getDay()];
+        if (diasTexto.includes(nombreDia)) {
+          const tr = document.createElement('tr');
+          if (i <= 2) tr.className = 'table-danger';
+          else if (i <= 3) tr.className = 'table-warning';
+          else tr.className = 'table-light';
+
+          tr.innerHTML = `
+            <td>${nombreDia.charAt(0).toUpperCase() + nombreDia.slice(1)}</td>
+            <td>${fecha.toLocaleDateString()}</td>
+            <td>${desde}</td>
+            <td>${hasta}</td>
+          `;
+          tbody.appendChild(tr);
+        }
+      }
+    }
+
+    diasInput.addEventListener('input', actualizarTabla);
+    horaDesde.addEventListener('input', actualizarTabla);
+    horaHasta.addEventListener('input', actualizarTabla);

@@ -1,0 +1,10 @@
+extends layoutEmpleado
+
+block contenido
+  .alert.alert-danger.mx-auto.shadow-sm(style="max-width: 500px;")
+    h4.alert-heading Error
+    p #{mensaje}
+    hr
+    a.btn.btn-secondary(href="/")
+      i.fa.fa-arrow-left.me-1
+      | Volver al listado

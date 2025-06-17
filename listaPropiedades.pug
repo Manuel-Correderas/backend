@@ -1,0 +1,56 @@
+extends layoutPropietario
+
+block contenido
+  h2.mb-4 Mis Propiedades
+
+  if propiedades && propiedades.length
+    each propiedad in propiedades
+      .card.mb-4
+        .card-header
+          h4.mb-0 #{propiedad.direccion}
+
+        .card-body
+          if propiedad.foto
+            img(src=propiedad.foto, alt='Foto propiedad', style='max-width: 200px')
+
+          h5.mt-3 Días y horarios disponibles (próximos 7 días)
+          table.table.table-bordered
+            thead
+              tr
+                th Día
+                th Fecha
+                th Hora desde
+                th Hora hasta
+            tbody
+              -
+                const dias = propiedad.diasDisponibles?.split(',').map(d => d.trim().toLowerCase()) || [];
+                const desde = propiedad.horaDesde || '-';
+                const hasta = propiedad.horaHasta || '-';
+                const diasSemana = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+                const hoy = new Date();
+                const diasRenderizados = Array.from({ length: 7 }, (_, i) => {
+                  const fecha = new Date();
+                  fecha.setDate(hoy.getDate() + i + 1);
+                  const nombreDia = diasSemana[fecha.getDay()];
+                  if (!dias.includes(nombreDia)) return null;
+                  const claseColor = i <= 1 ? 'table-danger' : i <= 2 ? 'table-warning' : 'table-light';
+                  return {
+                    nombreDia: nombreDia.charAt(0).toUpperCase() + nombreDia.slice(1),
+                    fecha: fecha.toLocaleDateString(),
+                    desde,
+                    hasta,
+                    claseColor
+                  };
+                }).filter(Boolean);
+
+              each fila in diasRenderizados
+                tr(class=fila.claseColor)
+                  td= fila.nombreDia
+                  td= fila.fecha
+                  td= fila.desde
+                  td= fila.hasta
+  else
+    p.text-muted No hay propiedades registradas aún.
+  a.btn.btn-outline-secondary.mt-4(href=`/propietario/${id}/dashboard`)
+    i.fa.fa-arrow-left.me-1
+    | Volver al Panel

@@ -1,0 +1,7 @@
+extends layoutEmpleado
+
+block contenido
+  .alert.alert-danger.mt-5.text-center
+    h3 Error de Inicio de Sesión
+    p #{mensaje}
+    a.btn.btn-secondary.mt-3(href="/login") Volver a intentar

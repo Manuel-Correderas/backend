@@ -1,0 +1,46 @@
+extends layoutEmpleado
+
+block contenido
+  .card.mx-auto.shadow-sm.mb-4(style="max-width: 400px;")
+    .card-header.bg-primary.text-white.py-2
+      h3.mb-0 Detalle de Usuario
+    .card-body
+      if usuario.foto
+        img.img-fluid.rounded-circle.mb-3(src=usuario.foto alt=`Foto de ${usuario.nombre}`)
+      else
+        img.img-fluid.rounded-circle.mb-3(src="https://via.placeholder.com/150" alt="Sin foto")
+      ul.list-group
+        li.list-group-item
+          strong ID: 
+          | #{usuario.id}
+        li.list-group-item
+          strong Nombre: 
+          | #{usuario.nombre}
+        li.list-group-item
+          strong Apellido: 
+          | #{usuario.apellido}
+        li.list-group-item
+          strong DNI: 
+          | #{usuario.dni}
+        li.list-group-item
+          strong Teléfono: 
+          | #{usuario.telefono}
+        li.list-group-item
+          strong Email: 
+          | #{usuario.email}
+        li.list-group-item
+          strong Rol: 
+          | #{usuario.rol}
+        li.list-group-item
+          strong Usuario: 
+          | #{usuario.usuario}
+        li.list-group-item
+          strong Contraseña: 
+          | #{usuario.contrasena}
+      .d-flex.justify-content-between.mt-3
+        a.btn.btn-secondary(href="/usuarios")
+          i.fa.fa-arrow-left.me-1
+          | Volver
+        a.btn.btn-warning(href=`/usuarios/${usuario.id}/editar`)
+          i.fa.fa-edit.me-1
+          | Editar

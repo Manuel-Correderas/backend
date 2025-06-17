@@ -1,0 +1,26 @@
+extends layoutEmpleado
+
+block contenido
+  .card.shadow-sm.mb-4
+    .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+      h2.mb-0 Solicitar Turno
+      a.btn.btn-secondary.btn-sm(href="/inicio")
+        i.fa.fa-arrow-left.me-1
+        | Volver
+
+    .card-body
+      form(method="POST", action=`/inquilino/${id}/solicitar-turno`)
+        .mb-3
+          label.form-label(for="propiedadId") Seleccionar Propiedad
+          select.form-select(name="propiedadId" required)
+            each propiedad in propiedades
+              option(value=propiedad.id) #{propiedad.direccion}
+        .mb-3
+          label.form-label(for="fecha") Fecha
+          input.form-control(type="date" name="fecha" required)
+        .mb-3
+          label.form-label(for="hora") Hora
+          input.form-control(type="time" name="hora" required)
+        button.btn.btn-primary(type="submit")
+          i.fa.fa-paper-plane.me-1
+          | Enviar Solicitud
