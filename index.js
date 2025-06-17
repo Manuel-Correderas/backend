@@ -282,7 +282,7 @@ app.put('/empleado/:id/tareas/:tid', async (req, res) => {
   tareas[idx].informe = req.body.informe;
   tareas[idx].finalizada = true;
   tareas[idx].estado = 'finalizada';
-  await escribirTareas(tareas);
+  await escribirJSON(DB_TAREAS, tareas)
   res.redirect(`/empleado/${req.params.id}/tareas`);
 });
 //Propietario-Inquilino-Turnos
@@ -398,6 +398,18 @@ app.get('/empleado/:id/dashboard', async (req, res) => {
 
   res.render('dashboardEmpleado', { empleado, turnos: aceptados });
 });
+///
+
+///
+app.get('/propietario/:id/dashboard', async (req, res) => {
+  const { id } = req.params;
+  const propiedades = await leerJSON(DB_PROPIEDADES);
+  const propias = propiedades.filter(p => p.propietarioId === parseInt(id));
+  const turnos = await leerJSON(DB_TURNOS);
+  const solicitudes = turnos.filter(t => propias.some(p => p.id === t.propiedadId));
+  res.render('dashboardPropietario', { id, propiedades: propias, solicitudes });
+});
+
 
 
 

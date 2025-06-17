@@ -6,5 +6,17 @@
     "inquilinoId": null,
     "vencimiento": null,
     "estado": "disponible"
+  },
+  {
+    "id": 2,
+    "direccion": "Av san juan 1",
+    "propietarioId": 2,
+    "inquilinoId": null,
+    "vencimiento": null,
+    "estado": "disponible",
+    "diasDisponibles": "Lunes,Miércoles",
+    "horaDesde": "15:00",
+    "horaHasta": "16:30",
+    "foto": "/public/uploads/foto-1750118712999.jpg"
   }
 ]

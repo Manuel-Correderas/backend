@@ -28,5 +28,16 @@
     "empleadoId": 12,
     "informe": "",
     "finalizada": false
+  },
+  {
+    "id": 1750114609030,
+    "titulo": "Limpieza",
+    "descripcion": "Limpieza de baños",
+    "prioridad": "Alta",
+    "area": "Mantenimiento",
+    "empleadoId": 20,
+    "informe": "Comprar más quita sarro para inodoros. Pegar carteles que digan: \"No tirar carteles dentro de los inodoros\".",
+    "finalizada": true,
+    "estado": "finalizada"
   }
 ]
